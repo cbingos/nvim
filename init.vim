@@ -65,13 +65,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
   execute 'packadd packer.nvim'
 end
--- git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
--- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
--- Only if your version of Neovim doesn't have https://github.com/neovim/neovim/pull/12632 merged
--- vim._update_package_paths()
--- dir in lua/plugins.lua
--- return require('packer').startup(function()
 require('packer').startup({function()
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
@@ -113,17 +107,15 @@ require('packer').startup({function()
     use 'sbdchd/neoformat'  -- 代码格式化 call:F8 call :Neoformat /:Neoformat! python yapf 
     -- ln -s /Users/xuanxuan/miniconda3/envs/optornado/bin/yapf /usr/local/bin/yapf
     use 'neomake/neomake' -- python 代码检查
-    -- lsp 补全
     use 'neovim/nvim-lspconfig' -- lsp config
-    use 'nvim-lua/completion-nvim'
+    use 'nvim-lua/completion-nvim' -- completion for lspconfig
     use 'glepnir/lspsaga.nvim' -- light-weight with highly a performant UI
-    --" 代码高亮显示,:TSInstall python css html javascript scss typescript
+    --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
     use 'romgrk/nvim-treesitter-context' --  类和函数超屏显示
     use 'nvim-treesitter/nvim-treesitter-refactor' -- 变量与函数跳转 
     use 'liuchengxu/vim-which-key' -- 快捷键提示
     use 'alvan/vim-closetag'
-    --vim输入法自动切换
     -- ******************vim输入法自动切换***************
     -- $ curl -o /usr/local/bin/xkbswitch https://raw.githubusercontent.com/myshov/xkbswitch-macosx/master/bin/xkbswitch
     -- sudo chmod 777 /usr/local/bin/xkbswitch
@@ -331,16 +323,6 @@ let g:startify_lists = [
         \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
 let g:startify_bookmarks = ['~/Google 云端硬盘/tornadoProject/ichingshifa','~/Public/']
-" vim-startify 自动保存session
-" function! GetUniqueSessionName()
-  " let path = fnamemodify(getcwd(), ':~:t')
-  " let path = empty(path) ? 'no-project' : path
-  " let branch = gitbranch#name()
-  " let branch = empty(branch) ? '' : '-' . branch
-  " return substitute(path . branch, '/', '-', 'g')
-" endfunction
-" autocmd VimLeavePre * silent execute 'SSave! ' . GetUniqueSessionName()
-
 " ******************theme 设置***************
 " let g:gruvbox_italic=1
 " theme gui&command模式配置
@@ -368,8 +350,6 @@ augroup fmt
   autocmd!
   autocmd BufWritePre * undojoin | Neoformat
 augroup END
-
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " ******************neomake 设置***************
 let g:neomake_python_enabled_makers = ['flake8'] "['pylint']
 " neomake启动自动检查 normal mode (after 500ms; no delay when writing)
@@ -380,12 +360,6 @@ let g:NERDSpaceDelims=1
 " 设置分割线 ┊,│,
 set fillchars=vert:┊,stl:\ ,stlnc:\ 
 set list lcs=tab:\ \ ,conceal:\|
-" 基于缩进或语法" 进行代码折叠
-" set foldmethod=manual
-" set foldlevelstart=2
-" set foldenable
-" set foldcolumn=auto:1
-" set signcolumn=auto:1
 " 保持缩进
 augroup remember_folds
   autocmd!
@@ -499,8 +473,6 @@ augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
-" ******************PackerCompile设置***************
-" autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 " ******************pythonF9自动运行设置***************
 map <F9> :call CompileRunGcc()<CR>
 nnoremap <silent> <leader>r :call CompileRunGcc()<CR>
@@ -647,11 +619,6 @@ nnoremap <silent> <localleader> :WhichKey ';'<CR>
 nnoremap <silent> t :<c-u>WhichKey 't'<CR>
 nnoremap <silent> f :<c-u>WhichKey 'f'<CR>
 " ******************startify hide status***************
-" autocmd! FileType which_key
-" autocmd  FileType which_key set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC
-" autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded init.vim Successful"
 " 根据不同文件设定编辑参数
 " * shiftwidth,sw: 缩进宽度
 " * softtabstop, sts: Tab 的宽度，软设置，并不改变 tabstop 的设定
@@ -679,3 +646,5 @@ autocmd BufReadPost *
             \ if line("'\"") > 0 && line("'\"") <= line("$") |
             \   execute "normal g`\"" |
             \ endif
+" 保存init.vim时自动重载，可以直接调用：PackerInstall进行安装
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC
