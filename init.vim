@@ -109,6 +109,7 @@ require('packer').startup({function()
     use 'neomake/neomake' -- python 代码检查
     use 'neovim/nvim-lspconfig' -- lsp config
     use 'nvim-lua/completion-nvim' -- completion for lspconfig
+    use 'steelsojka/completion-buffers' -- completion buffers
     use 'glepnir/lspsaga.nvim' -- light-weight with highly a performant UI
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
@@ -239,6 +240,9 @@ nmap k <Plug>(accelerated_jk_gk)
 " ******************completion-nvim lsp异步补全设置***************
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet','buffers']},
+    \]
 " " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
