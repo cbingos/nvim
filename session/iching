@@ -1,0 +1,268 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +9 ~/quotes_user.py
+badd +144 ~/.config/nvim/init.vim
+badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/models.py
+badd +51 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/urls.py
+badd +9 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+badd +11 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/authenticated_async.py
+badd +222 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
+badd +260 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
+badd +217 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/ichingshifa.py
+badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/__doc__
+badd +1545 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/peewee.py
+badd +107 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/lunar_day.py
+badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/uimethods.py
+badd +15 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/jwt/__init__.py
+badd +13 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/jwt_auth.py
+badd +255 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/tornado/web.py
+badd +17 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/urls.py
+badd +22 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/settings.py
+badd +15 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/peewee_async.py
+badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimodules.py
+badd +5 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/ichingshifa.py
+badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/handler.py
+badd +1 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/sxtwl.py
+argglobal
+%argdel
+set stal=2
+tabnew
+tabnew
+tabnew
+tabnew
+tabnew
+tabnew
+tabrewind
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/urls.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 54 - ((29 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 54
+normal! 068|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+argglobal
+balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/urls.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+63
+normal! zo
+64
+normal! zo
+86
+normal! zo
+94
+normal! zo
+529
+normal! zo
+537
+normal! zo
+let s:l = 9 - ((8 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 9
+normal! 054|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '2resize ' . ((&lines * 1 + 24) / 49)
+exe 'vert 2resize ' . ((&columns * 137 + 71) / 143)
+argglobal
+balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 222 - ((23 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 222
+normal! 0
+wincmd w
+argglobal
+enew
+balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+wincmd w
+exe '2resize ' . ((&lines * 1 + 24) / 49)
+exe 'vert 2resize ' . ((&columns * 137 + 71) / 143)
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/lunar_day.py
+argglobal
+balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+103
+normal! zo
+let s:l = 107 - ((45 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 107
+normal! 027|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 260 - ((16 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 260
+normal! 016|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimodules.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+9
+normal! zo
+13
+normal! zo
+17
+normal! zo
+21
+normal! zo
+25
+normal! zo
+25
+normal! zo
+25
+normal! zo
+25
+normal! zo
+25
+normal! zo
+29
+normal! zo
+33
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+39
+normal! zo
+44
+normal! zo
+45
+normal! zo
+45
+normal! zo
+45
+normal! zo
+45
+normal! zo
+45
+normal! zo
+49
+normal! zo
+let s:l = 1 - ((0 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 023|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/ichingshifa.py
+argglobal
+balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 217 - ((20 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 217
+normal! 013|
+tabnext 3
+set stal=1
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=aoO
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+nohlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :
