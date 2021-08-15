@@ -241,7 +241,7 @@ nmap k <Plug>(accelerated_jk_gk)
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
 let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp', 'snippet','buffers']},
+    \{'complete_items': ['lsp', 'path', 'snippet', 'buffers']},
     \]
 " " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
