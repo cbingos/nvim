@@ -11,7 +11,7 @@
   local execute = vim.api.nvim_command
   local fn = vim.fn
   local install_path = 			  fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
+  if fn.empty(fn.glob(install_path)) 0 then
     fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
     execute 'packadd packer.nvim'
   end
@@ -196,9 +196,9 @@ autocmd BufEnter * lua require'completion'.on_attach()
 let g:completion_chain_complete_list = [
     \{'complete_items': ['lsp', 'path', 'snippet', 'buffers']},
     \]
-" " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " Use <Taband <S-Tabto navigate through popup menu
+inoremap <expr<Tab  pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr<S-Tabpumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
@@ -233,24 +233,24 @@ let g:netrw_winsize = 25
 let g:Lf_WindowPosition = 'popup'
 " brew install ctags 安装ctags 以便支持;:LeaderfFunction
 " 列出所有LeaderF的可执行命令, 供用户检索, 可以不用记忆所有其他命令
-noremap <silent> <Localleader>fh :LeaderfSelf<cr>
+noremap <silent<Localleader>fh :LeaderfSelf<cr>
 " 搜索most recently used file, 默认显示100个, 可以配置数量
-noremap <silent> <Localleader>fm :LeaderfMru<cr>
+noremap <silent<Localleader>fm :LeaderfMru<cr>
 " 搜索当前目录most recently used file, 默认显示100个, 可以配置数量
-noremap <silent> <Localleader>fmm :LeaderfMruCwd<cr>
+noremap <silent<Localleader>fmm :LeaderfMruCwd<cr>
 " 查找当前文件的函数或者方法, 这个基本可以用来替代tarbar
-noremap <silent> <Localleader>ff :LeaderfFunction!<cr>
+noremap <silent<Localleader>ff :LeaderfFunction!<cr>
 " 检索当前buffer的tags
-noremap <silent> <Localleader>ft :LeaderfBufTag!<cr>
+noremap <silent<Localleader>ft :LeaderfBufTag!<cr>
 " 但查找所有listed buffers的tags
-noremap <silent> <Localleader>fb :LeaderfBufTagAll!<cr>
+noremap <silent<Localleader>fb :LeaderfBufTagAll!<cr>
 " 在当前文件单词搜索行, 可以用来替代/和?
-noremap <silent> <Localleader>fl :LeaderfLine<cr>
+noremap <silent<Localleader>fl :LeaderfLine<cr>
 " 在所有vim的windows里检索
-noremap <silent> <Localleader>fw :LeaderfWindow<cr>
+noremap <silent<Localleader>fw :LeaderfWindow<cr>
 " Hop 快捷单词跳转 ;j 行跳转;l 
-noremap <silent> <Localleader>j <cmd>lua require'hop'.hint_words()<cr>
-noremap <silent> <Localleader>l :HopLine<cr>
+noremap <silent<Localleader>j <cmd>lua require'hop'.hint_words()<cr>
+noremap <silent<Localleader>l :HopLine<cr>
 " ******************模版补全ultisnips***************
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -311,7 +311,7 @@ set showtabline=2
 " ******************neoformat 设置***************
 let g:neoformat_enabled_python = ['yapf',]
 " let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
-autocmd FileType python noremap <buffer> <F8> :Neoformat! python yapf<CR>
+autocmd FileType python noremap <buffer<F8:Neoformat! python yapf<CR>
 " save files with auto format
 augroup fmt
   autocmd!
@@ -452,10 +452,10 @@ augroup highlight_yank
     au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
 augroup END
 " ******************PackerCompile设置***************
-" autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+" autocmd BufWritePost plugins.lua source <afile| PackerCompile
 " ******************pythonF9自动运行设置***************
-map <F9> :call CompileRunGcc()<CR>
-nnoremap <silent> <leader>r :call CompileRunGcc()<CR>
+map <F9:call CompileRunGcc()<CR>
+nnoremap <silent<leader>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
@@ -487,48 +487,48 @@ autocmd BufNewFile * normal G o
 " ******************session设置***************
 " 默认超时是 1000 ms,超时提示对应的快捷键
 set timeoutlen=500
-nnoremap <silent> <leader>sl :SLoad<CR>
-nnoremap <silent> <leader>ss :SSave<CR>
-nnoremap <silent> <leader>sd :SDelete<CR>
-nnoremap <silent> <leader>sc :SClose<CR>
-nnoremap <silent> <leader>u :UndotreeToggle<CR>
+nnoremap <silent<leader>sl :SLoad<CR>
+nnoremap <silent<leader>ss :SSave<CR>
+nnoremap <silent<leader>sd :SDelete<CR>
+nnoremap <silent<leader>sc :SClose<CR>
+nnoremap <silent<leader>u :UndotreeToggle<CR>
 " ******************window窗口设置***************
-nnoremap <silent> <leader>wh :wincmd h<CR>
-nnoremap <silent> <leader>wj :wincmd j<CR>
-nnoremap <silent> <leader>wk :wincmd k<CR>
-nnoremap <silent> <leader>wl :wincmd l<CR>
+nnoremap <silent<leader>wh :wincmd h<CR>
+nnoremap <silent<leader>wj :wincmd j<CR>
+nnoremap <silent<leader>wk :wincmd k<CR>
+nnoremap <silent<leader>wl :wincmd l<CR>
 " ******************vim 显示快捷帮助文档***************
-nnoremap <silent> <leader>h :Cheat40<CR>
+nnoremap <silent<leader>h :Cheat40<CR>
 " ******************lsp-key设置***************
 " 查看函数声明
-" nnoremap <silent> <Localleader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent<Localleader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 " " 查看函数定义
-nnoremap <silent> <Localleader>gd <cmd>tab split \| lua vim.lsp.buf.definition()<CR> " new tab
+nnoremap <silent<Localleader>gd <cmd>tab split \| lua vim.lsp.buf.definition()<CR" new tab
 " " 查看函数帮助文档
-" nnoremap <silent> <Localleader>gh <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent<Localleader>gh <cmd>lua vim.lsp.buf.hover()<CR>
 " " 查看函数相关引用
-nnoremap <silent> <Localleader>ge <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent<Localleader>ge <cmd>lua vim.lsp.buf.references()<CR>
 " " 变量重命名
-" nnoremap <silent> <Localleader>gr <cmd>lua vim.lsp.buf.rename()<CR>
+" nnoremap <silent<Localleader>gr <cmd>lua vim.lsp.buf.rename()<CR>
 " " 查看前一处语法错误
-" nnoremap <silent> <Localleader>gj <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap <silent<Localleader>gj <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 " " 查看后一处语法错误
-" nnoremap <silent> <Localleader>gk <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+" nnoremap <silent<Localleader>gk <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " " go to definition lsp_finder/ preview_definition
-" nnoremap <silent> <Localleader>gd :Lspsaga preview_definition<CR>
+" nnoremap <silent<Localleader>gd :Lspsaga preview_definition<CR>
 " preview definition
-nnoremap <silent> <Localleader>gp :Lspsaga preview_definition<CR>
+nnoremap <silent<Localleader>gp :Lspsaga preview_definition<CR>
 " show documents
-nnoremap <silent> <Localleader>gh :Lspsaga hover_doc<CR>
+nnoremap <silent<Localleader>gh :Lspsaga hover_doc<CR>
 " signature help
-nnoremap <silent> <Localleader>gs :Lspsaga signature_help<CR>
+nnoremap <silent<Localleader>gs :Lspsaga signature_help<CR>
 " fix
-nnoremap <silent> <Localleader>ga :Lspsaga code_action<CR>
+nnoremap <silent<Localleader>ga :Lspsaga code_action<CR>
 " rename
-nnoremap <silent> <Localleader>gr :Lspsaga rename<CR>
+nnoremap <silent<Localleader>gr :Lspsaga rename<CR>
 " jump diagnostic
-nnoremap <silent> <Localleader>gj :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> <Localleader>gk :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent<Localleader>gj :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent<Localleader>gk :Lspsaga diagnostic_jump_prev<CR>
 " ******************Leader***************
 let g:which_key_map_localleader =  {
             \'b' : 'LeaderF 缓冲区文件',
@@ -594,14 +594,14 @@ let g:which_key_map_tab = {
             \'n' : ['tabnew','tab新建'],
             \}
 call which_key#register('t', "g:which_key_map_tab")
-nnoremap <silent> <leader> :WhichKey ';'<CR>
-nnoremap <silent> <localleader> :WhichKey ';'<CR>
-nnoremap <silent> t :<c-u>WhichKey 't'<CR>
-nnoremap <silent> f :<c-u>WhichKey 'f'<CR>
+nnoremap <silent<leader:WhichKey ';'<CR>
+nnoremap <silent<localleader:WhichKey ';'<CR>
+nnoremap <silentt :<c-u>WhichKey 't'<CR>
+nnoremap <silentf :<c-u>WhichKey 'f'<CR>
 " ******************startify hide status***************
 " autocmd! FileType which_key
 " autocmd  FileType which_key set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+"   \| autocmd BufLeave <bufferset laststatus=2 showmode ruler
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 " autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded init.vim Successful"
 " 根据不同文件设定编辑参数
@@ -628,64 +628,66 @@ autocmd FileType yaml set shiftwidth=4 expandtab softtabstop=4
 " autocmd BufEnter * if len(tabpagebuflist()) == 1 | Startify | endif
 " 打开文件时，自动跳到上次打开时的位置。如果该位置有错，则不做跳转
 autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \ if line("'\"") 0 && line("'\"") <= line("$") |
             \   execute "normal g`\"" |
             \ endif
 ```
 ## [python miniforge环境设置](https://github.com/conda-forge/miniforge)
 ### download miniforge
 1. for mac:
-> bash: curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
+bash: curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
 2. for linux 
-> curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 ### install miniforge
-> bash Miniforge3-xxx.sh -b $HOME/miniforge3
-> conda env list 
+​	bash Miniforge3-xxx.sh -b $HOME/miniforge3
+​	conda env list 
+
 >
-> for fish shell: conda init fish
+for fish shell: conda init fish
 ### settings miniforge
-> conda create -n optornado python
-> conda activate optornado
-> conda deactivate optornado
-> conda配置清华源
-> conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-> conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-> conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-> conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-> conda config --set show_channel_urls yes
-> pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改
+``` bash
+conda create -n optornado python
+conda activate optornado
+conda deactivate optornado
+conda配置清华源
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+conda config --set show_channel_urls yes
+pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改
 
 ### nvim startuptime
-> python nvim-startuptime.py nvim
-> Top 50 plugins slowing nvim's startup
-> 1	13.493   onehalf
-> 2	 4.649   neomake
-> 3	 2.304   tabular
-> 4	 2.199   lightline.vim
-> 5	 2.175   nerdcommenter
-> 6	 2.009   nvim-treesitter
-> 7	 0.917   vim-xkbswitch
-> 8	 0.896   LeaderF
-> 9	 0.876   vim-doge
-> 10	 0.752   completion-buffers
-> 11	 0.663   ultisnips
-> 12	 0.471   beacon.nvim
-> 13	 0.415   vim-surround
-> 14	 0.391   nvim-treesitter-refactor
-> 15	 0.384   indentLine
-> 16	 0.381   auto-pairs
-> 17	 0.376   vim-which-key
-> 18	 0.350   vim-closetag
-> 19	 0.279   lspsaga.nvim
-> 20	 0.222   completion-nvim
-> 21	 0.174   undotree
-> 22	 0.140   vim-cursorword
-> 23	 0.117   vim-startify
-> 24	 0.114   hop
-> 25	 0.113   nvim-lspconfig
-> 26	 0.099   accelerated-jk
-> 27	 0.059   vim-cheat40
-> 28	 0.052   nvim-colorizer.lua
-> 29	 0.050   vim-snippets
-> 30	 0.036   neoformat
-> 31	 0.033   nvim-treesitter-context
+```bash python nvim-startuptime.py nvim
+Top 50 plugins slowing nvim's startup
+1	13.493   onehalf
+2	 4.649   neomake
+3	 2.304   tabular
+4	 2.199   lightline.vim
+5	 2.175   nerdcommenter
+6	 2.009   nvim-treesitter
+7	 0.917   vim-xkbswitch
+8	 0.896   LeaderF
+9	 0.876   vim-doge
+10	 0.752   completion-buffers
+11	 0.663   ultisnips
+12	 0.471   beacon.nvim
+13	 0.415   vim-surround
+14	 0.391   nvim-treesitter-refactor
+15	 0.384   indentLine
+16	 0.381   auto-pairs
+17	 0.376   vim-which-key
+18	 0.350   vim-closetag
+19	 0.279   lspsaga.nvim
+20	 0.222   completion-nvim
+21	 0.174   undotree
+22	 0.140   vim-cursorword
+23	 0.117   vim-startify
+24	 0.114   hop
+25	 0.113   nvim-lspconfig
+26	 0.099   accelerated-jk
+27	 0.059   vim-cheat40
+28	 0.052   nvim-colorizer.lua
+29	 0.050   vim-snippets
+30	 0.036   neoformat
+31	 0.033   nvim-treesitter-context
