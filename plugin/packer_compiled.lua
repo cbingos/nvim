@@ -98,13 +98,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/indentLine"
   },
-  ["lightline-bufferline"] = {
-    loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lightline-bufferline"
-  },
   ["lightline.vim"] = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lightline.vim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
   neoformat = {
     loaded = true,
@@ -157,6 +157,10 @@ _G.packer_plugins = {
   undotree = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/undotree"
+  },
+  ["vim-cheat40"] = {
+    loaded = true,
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-cheat40"
   },
   ["vim-closetag"] = {
     loaded = true,
