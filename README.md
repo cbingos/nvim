@@ -1,4 +1,7 @@
 ##  nvim-config for python
+
+	配置python时请注意修改init.vim文件中关于python、yapf等的实际路径
+
 ## PackerSync + treesitter + nvim-lspconfig + completion-nvim
 1. Packer 设置
 
@@ -63,7 +66,6 @@
     use 'nvim-treesitter/nvim-treesitter-refactor' -- 变量与函数跳转 
     use 'liuchengxu/vim-which-key' -- 快捷键提示
     use 'alvan/vim-closetag'
-    --vim输入法自动切换
     -- ******************vim输入法自动切换***************
     -- $ curl -o /usr/local/bin/xkbswitch https://raw.githubusercontent.com/myshov/xkbswitch-macosx/master/bin/xkbswitch
     -- sudo chmod 777 /usr/local/bin/xkbswitch
