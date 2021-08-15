@@ -1,4 +1,4 @@
-" 使用PackerSync + treesitter + lsp + lsp补全
+" PackerSync + treesitter + nvim-lspconfig + completion-nvim
 " ******************vim基础***************
 " 快速移动行:6m0 第6行移至第1行[range]m[range] -->move
 " 快速复制行:6c0 复制6行至第1行[range]c[range] -->copy
@@ -24,29 +24,27 @@
 " 垂直窗口：:vsp 
 " 关闭窗口：:clo[se]
 " 切换窗口：Ctrl+w +h,j,k,l
-" ******************python miniforge环境设置***************
-" https://github.com/conda-forge/miniforge
-" for mac:
-" bash: curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
-" for linux 
-" " curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
-" bash Miniforge3-xxx.sh -b
-" $HOME/miniforge3
-" conda env list
-" for linux:
-" for fish shell: conda init fish
-" ******************conda setting
-" conda create -n optornado python
-" conda activate optornado
-" conda deactivate optornado
-" conda配置清华源
-" conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-" conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-" conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-" conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
-" conda config --set show_channel_urls yes
-" conda install neovim flake8 jedi-language-server  lspconfig配置需要绝对路径，记得修改
-" pip install neovim flake8 jedi-language-server 
+" ******************## [python miniforge环境设置](https://github.com/conda-forge/miniforge)
+" ### download miniforge
+" 1. for mac:
+" > bash: curl -fsSLo Miniforge3.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-$(uname -m).sh
+" 2. for linux 
+" > curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+" ### install miniforge
+" > bash Miniforge3-xxx.sh -b
+" > $HOME/miniforge3
+" > conda env list (for fish shell: conda init fish)
+" ### settings miniforge
+" > conda create -n optornado python
+" > conda activate optornado
+" > conda deactivate optornado
+" > conda配置清华源
+" > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+" > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+" > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+" > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+" > conda config --set show_channel_urls yes
+" > pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改境设置***************
 " ******************nvim treesitter语法高亮设置***************
 " 真彩色,修复终端和gui显示不同配色问题
 if has("termguicolors")
