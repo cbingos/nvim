@@ -168,7 +168,7 @@ require'nvim-treesitter.configs'.setup {
             keymaps = {
                 goto_definition = "fd", -- 跳转到定义
                 list_definitions = "fD", -- 显示定义
-                list_definitions_toc = "fl", -- 显示所有引用
+                list_definitions_toc = "fl", -- 显示所有定义
                 goto_next_usage = "fj", -- 跳转至下一个引用
                 goto_previous_usage = "fk", -- 跳转至上一个引用
             },
@@ -631,9 +631,10 @@ autocmd BufReadPost *
 2. for linux 
 > curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 ### install miniforge
-> bash Miniforge3-xxx.sh -b
-> $HOME/miniforge3
-> conda env list (for fish shell: conda init fish)
+> bash Miniforge3-xxx.sh -b $HOME/miniforge3
+> conda env list 
+>
+> for fish shell: conda init fish
 ### settings miniforge
 > conda create -n optornado python
 > conda activate optornado

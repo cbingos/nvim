@@ -220,7 +220,7 @@ require'nvim-treesitter.configs'.setup {
             keymaps = {
                 goto_definition = "fd", -- 跳转到定义
                 list_definitions = "fD", -- 显示定义
-                list_definitions_toc = "fl", -- 显示所有引用
+                list_definitions_toc = "fl", -- 显示所有定义
                 goto_next_usage = "fj", -- 跳转至下一个引用
                 goto_previous_usage = "fk", -- 跳转至上一个引用
             },
