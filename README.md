@@ -654,3 +654,38 @@ autocmd BufReadPost *
 > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 > conda config --set show_channel_urls yes
 > pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改
+
+### nvim startuptime
+> python nvim-startuptime.py nvim
+> Top 50 plugins slowing nvim's startup
+> 1	13.493   onehalf
+> 2	 4.649   neomake
+> 3	 2.304   tabular
+> 4	 2.199   lightline.vim
+> 5	 2.175   nerdcommenter
+> 6	 2.009   nvim-treesitter
+> 7	 0.917   vim-xkbswitch
+> 8	 0.896   LeaderF
+> 9	 0.876   vim-doge
+> 10	 0.752   completion-buffers
+> 11	 0.663   ultisnips
+> 12	 0.471   beacon.nvim
+> 13	 0.415   vim-surround
+> 14	 0.391   nvim-treesitter-refactor
+> 15	 0.384   indentLine
+> 16	 0.381   auto-pairs
+> 17	 0.376   vim-which-key
+> 18	 0.350   vim-closetag
+> 19	 0.279   lspsaga.nvim
+> 20	 0.222   completion-nvim
+> 21	 0.174   undotree
+> 22	 0.140   vim-cursorword
+> 23	 0.117   vim-startify
+> 24	 0.114   hop
+> 25	 0.113   nvim-lspconfig
+> 26	 0.099   accelerated-jk
+> 27	 0.059   vim-cheat40
+> 28	 0.052   nvim-colorizer.lua
+> 29	 0.050   vim-snippets
+> 30	 0.036   neoformat
+> 31	 0.033   nvim-treesitter-context
