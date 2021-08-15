@@ -242,6 +242,8 @@ nmap k <Plug>(accelerated_jk_gk)
 autocmd BufEnter * lua require'completion'.on_attach()
 let g:completion_chain_complete_list = [
     \{'complete_items': ['lsp', 'path', 'snippet', 'buffers']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
     \]
 " " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -259,9 +261,13 @@ let g:completion_enable_snippet = 'UltiSnips'
 " let g:completion_enable_auto_signature = 0
 " let g:completion_trigger_keyword_length = 3 " default = 1
 " Timer Adjustment
-let g:completion_timer_cycle = 60 "default value is 80
+let g:completion_timer_cycle = 90 "default value is 80
 " trigger on delete
 let g:completion_trigger_on_delete = 1
+" possible value: "length", "alphabet", "none"
+let g:completion_sorting = "none"
+" trigger characters
+let g:completion_trigger_character = ['.', '::']
 " ******************leader键设置***************
 " 定义本地leader 键;
 let g:mapleader = ";"
