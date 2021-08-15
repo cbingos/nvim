@@ -641,13 +641,12 @@ autocmd BufEnter *.java,*.jsp set shiftwidth=4 expandtab tabstop=4 softtabstop=4
 autocmd FileType c,cpp  set noexpandtab shiftwidth=4 softtabstop=4
 autocmd FileType dot  set shiftwidth=4 expandtab softtabstop=4
 autocmd FileType sh set expandtab tabstop=4 shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType php set shiftwidth=4 noexpandtab softtabstop=4
 autocmd FileType java,jsp set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
 autocmd BufEnter *.html,*.xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
 autocmd FileType html,xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
 autocmd FileType javascript,css set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
 autocmd FileType python set shiftwidth=4 expandtab softtabstop=4
+autocmd FileType *.conf set shiftwidth=4 expandtab softtabstop=4
 autocmd FileType yaml set shiftwidth=4 expandtab softtabstop=4
 " 所有buffer关闭时打开首页,使用命令:bd (buffer-delete) 
 " autocmd BufEnter * if len(tabpagebuflist()) == 1 | Startify | endif
