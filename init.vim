@@ -45,6 +45,7 @@
 " > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 " > conda config --set show_channel_urls yes
 " > pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改境设置***************
+let g:coq_settings = { 'auto_start': v:true } " coq 自动启动 
 " ******************nvim treesitter语法高亮设置***************
 " 真彩色,修复终端和gui显示不同配色问题
 if has("termguicolors")
@@ -73,12 +74,10 @@ require('packer').startup({function()
     -- using packer.nvim
     -- 模糊查找
     use {'Yggdroot/LeaderF', run=':LeaderfInstallCExtension' }
-    -- 代码模版补全
-    -- use 'skywind3000/Leaderf-snippet'
-    use 'SirVer/ultisnips'
-    use 'honza/vim-snippets'
     -- 删除the delimiters entirely, press ds"
     use 'tpope/vim-surround' -- 修改包裹符号 'string' 按下: cs'": string" 
+    -- https://github.com/terryma/vim-multiple-cursors/wiki/Keystrokes-for-example-gifs
+    -- use 'terryma/vim-multiple-cursors' -- 快速编辑c+v c+n,c,c+return回车 
     use 'danilamihailov/beacon.nvim' --大跳转时分屏切换高亮显示
     use 'rhysd/accelerated-jk' -- 加快j、k 速度
     use 'mbbill/undotree' -- 显示撤消历史 ;u
@@ -90,7 +89,6 @@ require('packer').startup({function()
     }
     use {'norcalli/nvim-colorizer.lua', -- color: #8080ff; 十六进制颜色实时显示
     }
-    --  use 'psliwka/vim-smoothie' -- 滚动翻页时效果, c+d c+u
     use 'scrooloose/nerdcommenter' --注释 ;cc 取消注释;cu
     use 'mhinz/vim-startify' -- 在启动窗口显示最近打开的文件 :Startify
     use 'jiangmiao/auto-pairs' -- 括号自动补全
@@ -108,8 +106,9 @@ require('packer').startup({function()
     -- ln -s /Users/xuanxuan/miniconda3/envs/optornado/bin/yapf /usr/local/bin/yapf
     use 'neomake/neomake' -- python 代码检查
     use 'neovim/nvim-lspconfig' -- lsp config
-    use 'nvim-lua/completion-nvim' -- completion for lspconfig
-    use 'steelsojka/completion-buffers' -- completion buffers
+    use {'ms-jpq/coq_nvim', branch='coq'} -- COQdeps COQnow COQhelp
+    use {'ms-jpq/coq.artifacts', branch='artifacts'}
+    use {'ms-jpq/coq.thirdparty', branch='3p'}
     use 'glepnir/lspsaga.nvim' -- light-weight with highly a performant UI
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
@@ -128,6 +127,7 @@ end,
         display = {open_fn = require('packer.util').float,}
     }
 })
+local coq = require "coq"
 -- nvim-colorizer.lua: #8080ff; 十六进制颜色实时显示
 require'colorizer'.setup{
         'css';
@@ -177,10 +177,17 @@ saga.init_lsp_saga {
 -- jedi_language_server 速度好像更快：cmd只支持绝对路径
 require'lspconfig'.jedi_language_server.setup{
 cmd = {'/Users/xuanxuan/miniconda3/envs/optornado/bin/jedi-language-server'},
-    on_attach = require('completion').on_attach
+    coq.lsp_ensure_capabilities()
 }
 -- dart flutter
-require'lspconfig'.dartls.setup{on_attach = require('completion').on_attach}
+require'lspconfig'.dartls.setup{coq.lsp_ensure_capabilities()}
+-- coq_3p
+require("coq_3p") {
+  { src = "nvimlua", short_name = "nLUA" },
+  { src = "vimtex", short_name = "vTEX" },
+  { src = "copilot", short_name = "COP", tmp_accept_key = "<c-r>" },
+  { src = "bc", short_name = "MATH", precision = 6 },
+}
 require'nvim-treesitter.configs'.setup {
     -- run :TSInstall python html css dart javascript lua typescript
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -237,37 +244,16 @@ let g:python3_host_prog = "/Users/xuanxuan/miniconda3/envs/optornado/bin/python"
 " ******************accelerated_jk 加快j、k速度设置***************
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-" ******************completion-nvim lsp异步补全设置***************
+" ******************coq-nvim lsp异步补全设置***************
 " Use completion-nvim in every buffer
-autocmd BufEnter * lua require'completion'.on_attach()
-let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp', 'path', 'snippet', 'buffers']},
-    \{'mode': '<c-p>'},
-    \{'mode': '<c-n>'}
-    \]
 " " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+let g:coq_settings = { 'display.icons.mode': 'none' }
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
-" Enable Snippets Support
-" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip', 'snippets.nvim'
-let g:completion_enable_snippet = 'UltiSnips'
-" Enable/Disable auto hover
-" let g:completion_enable_auto_hover = 0
-" Enable/Disable auto signature
-" let g:completion_enable_auto_signature = 0
-" let g:completion_trigger_keyword_length = 3 " default = 1
-" Timer Adjustment
-let g:completion_timer_cycle = 90 "default value is 80
-" trigger on delete
-let g:completion_trigger_on_delete = 1
-" possible value: "length", "alphabet", "none"
-let g:completion_sorting = "none"
-" trigger characters
-let g:completion_trigger_character = ['.', '::']
 " ******************leader键设置***************
 " 定义本地leader 键;
 let g:mapleader = ";"
@@ -304,12 +290,6 @@ noremap <silent> <Localleader>fw :LeaderfWindow<cr>
 " Hop 快捷单词跳转 ;j 行跳转;l 
 noremap <silent> <Localleader>j <cmd>lua require'hop'.hint_words()<cr>
 noremap <silent> <Localleader>l :HopLine<cr>
-" ******************模版补全ultisnips***************
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " ******************vim-startify启动页***************
 let g:startify_session_dir = '~/.config/nvim/session'

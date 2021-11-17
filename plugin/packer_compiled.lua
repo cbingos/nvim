@@ -85,6 +85,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/beacon.nvim"
   },
+  ["completion-buffers"] = {
+    loaded = true,
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/completion-buffers"
+  },
   ["completion-nvim"] = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/completion-nvim"

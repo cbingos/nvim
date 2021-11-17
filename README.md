@@ -642,7 +642,6 @@ curl -o Miniforge3-linux-x86_64.sh https://github.com/conda-forge/miniforge/rele
 ​	bash Miniforge3-xxx.sh -b $HOME/miniforge3
 ​	conda env list 
 
->
 for fish shell: conda init fish
 ### settings miniforge
 ``` bash

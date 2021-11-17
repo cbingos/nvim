@@ -1,0 +1,284 @@
+let SessionLoad = 1
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+badd +76 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/server.py
+badd +27 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/tornado_learning/urls.py
+badd +28 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/urls.py
+badd +13 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/tornado_learning/handler.py
+badd +197 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/handler.py
+badd +161 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/datas/async_insert_account.py
+badd +55 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/utils/uimethods.py
+badd +89 ~/.config/nvim/init.vim
+badd +469 ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/models.py
+argglobal
+%argdel
+tabnew
+tabnew
+tabnew
+tabrewind
+edit ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/urls.py
+argglobal
+balt ~/Google\ 云端硬盘/tornadoProject/tornado_learning/server.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+28
+normal! zo
+let s:l = 30 - ((18 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 30
+normal! 019|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/handler.py
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '2resize ' . ((&lines * 1 + 26) / 52)
+exe 'vert 2resize ' . ((&columns * 121 + 63) / 127)
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+27
+normal! zo
+27
+normal! zo
+27
+normal! zo
+27
+normal! zo
+27
+normal! zo
+27
+normal! zo
+38
+normal! zo
+43
+normal! zo
+46
+normal! zo
+47
+normal! zo
+66
+normal! zo
+70
+normal! zo
+108
+normal! zo
+123
+normal! zo
+140
+normal! zo
+146
+normal! zo
+155
+normal! zo
+157
+normal! zo
+164
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+166
+normal! zo
+169
+normal! zo
+183
+normal! zo
+200
+normal! zo
+206
+normal! zo
+214
+normal! zo
+215
+normal! zo
+223
+normal! zo
+231
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+233
+normal! zo
+239
+normal! zo
+251
+normal! zo
+258
+normal! zo
+275
+normal! zo
+277
+normal! zo
+277
+normal! zo
+293
+normal! zo
+294
+normal! zo
+300
+normal! zo
+309
+normal! zo
+310
+normal! zo
+311
+normal! zo
+312
+normal! zo
+329
+normal! zo
+330
+normal! zo
+335
+normal! zo
+345
+normal! zo
+346
+normal! zo
+359
+normal! zo
+364
+normal! zo
+368
+normal! zo
+376
+normal! zo
+377
+normal! zo
+401
+normal! zo
+419
+normal! zo
+let s:l = 197 - ((12 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 197
+normal! 042|
+wincmd w
+argglobal
+enew
+balt ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/handler.py
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+wincmd w
+exe '2resize ' . ((&lines * 1 + 26) / 52)
+exe 'vert 2resize ' . ((&columns * 121 + 63) / 127)
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/tornado_learning/apps/stocks/models.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+465
+normal! zo
+529
+normal! zo
+535
+normal! zo
+let s:l = 49 - ((48 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 49
+normal! 07|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/tornado_learning/utils/uimethods.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+55
+normal! zo
+79
+normal! zo
+let s:l = 55 - ((11 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 55
+normal! 07|
+tabnext 2
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=filnxtToOFcI
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if filereadable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

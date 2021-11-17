@@ -8,33 +8,33 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +9 ~/quotes_user.py
-badd +144 ~/.config/nvim/init.vim
+badd +100 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+badd +409 ~/.config/nvim/init.vim
+badd +145 ~/quotes_user.py
 badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/models.py
-badd +51 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/urls.py
-badd +9 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
+badd +39 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/urls.py
 badd +11 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/authenticated_async.py
 badd +222 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
-badd +260 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
-badd +217 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/ichingshifa.py
+badd +42 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
+badd +18 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/ichingshifa.py
 badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/__doc__
 badd +1545 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/peewee.py
-badd +107 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/lunar_day.py
+badd +91 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/lunar_day.py
 badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/uimethods.py
 badd +15 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/jwt/__init__.py
 badd +13 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/jwt_auth.py
 badd +255 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/tornado/web.py
-badd +17 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/urls.py
+badd +33 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/urls.py
 badd +22 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/settings.py
 badd +15 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/peewee_async.py
-badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimodules.py
+badd +42 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimodules.py
 badd +5 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/ichingshifa.py
-badd +1 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/handler.py
+badd +327 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/user/handler.py
 badd +1 ~/miniconda3/envs/optornado/lib/python3.8/site-packages/sxtwl.py
+badd +54 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/server.py
+badd +44 ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/pyLunarCalendar/lunarApi.py
 argglobal
 %argdel
-set stal=2
-tabnew
 tabnew
 tabnew
 tabnew
@@ -51,12 +51,14 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 54 - ((29 * winheight(0) + 23) / 46)
+38
+normal! zo
+let s:l = 39 - ((19 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 54
-normal! 068|
+keepjumps 39
+normal! 029|
 tabnext
 edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
 argglobal
@@ -69,103 +71,194 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-63
+40
 normal! zo
-64
+46
 normal! zo
-86
+49
+normal! zo
+49
+normal! zo
+49
+normal! zo
+71
+normal! zo
+72
 normal! zo
 94
 normal! zo
-529
+95
 normal! zo
-537
+105
 normal! zo
-let s:l = 9 - ((8 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 9
-normal! 054|
-tabnext
-edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe '2resize ' . ((&lines * 1 + 24) / 49)
-exe 'vert 2resize ' . ((&columns * 137 + 71) / 143)
-argglobal
-balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
-setlocal fdm=indent
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 222 - ((23 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 222
-normal! 0
-wincmd w
-argglobal
-enew
-balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/models.py
-setlocal fdm=indent
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-wincmd w
-exe '2resize ' . ((&lines * 1 + 24) / 49)
-exe 'vert 2resize ' . ((&columns * 137 + 71) / 143)
-tabnext
-edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/lunar_day.py
-argglobal
-balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/apps/ichingshifa/handler.py
-setlocal fdm=indent
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-103
+106
 normal! zo
-let s:l = 107 - ((45 * winheight(0) + 23) / 46)
+113
+normal! zo
+130
+normal! zo
+132
+normal! zo
+152
+normal! zo
+157
+normal! zo
+166
+normal! zo
+167
+normal! zo
+169
+normal! zo
+188
+normal! zo
+194
+normal! zo
+198
+normal! zo
+208
+normal! zo
+222
+normal! zo
+323
+normal! zo
+336
+normal! zo
+340
+normal! zo
+346
+normal! zo
+354
+normal! zo
+359
+normal! zo
+360
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+373
+normal! zo
+377
+normal! zo
+384
+normal! zo
+391
+normal! zo
+391
+normal! zo
+391
+normal! zo
+391
+normal! zo
+391
+normal! zo
+394
+normal! zo
+408
+normal! zo
+421
+normal! zo
+434
+normal! zo
+447
+normal! zo
+460
+normal! zo
+473
+normal! zo
+491
+normal! zo
+499
+normal! zo
+507
+normal! zo
+515
+normal! zo
+523
+normal! zo
+528
+normal! zo
+528
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+539
+normal! zo
+548
+normal! zo
+556
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+573
+normal! zo
+581
+normal! zo
+589
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+618
+normal! zo
+626
+normal! zo
+631
+normal! zo
+let s:l = 100 - ((39 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 107
-normal! 027|
-tabnext
-edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
-argglobal
-setlocal fdm=indent
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=99
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-let s:l = 260 - ((16 * winheight(0) + 23) / 46)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 260
-normal! 016|
+keepjumps 100
+normal! 019|
 tabnext
 edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimodules.py
 argglobal
@@ -177,62 +270,170 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-9
+18
 normal! zo
-13
-normal! zo
-17
-normal! zo
-21
-normal! zo
-25
-normal! zo
-25
-normal! zo
-25
-normal! zo
-25
-normal! zo
-25
-normal! zo
-29
-normal! zo
-33
-normal! zo
-34
-normal! zo
-34
-normal! zo
-34
-normal! zo
-34
-normal! zo
-34
-normal! zo
-39
-normal! zo
-44
-normal! zo
-45
-normal! zo
-45
-normal! zo
-45
-normal! zo
-45
-normal! zo
-45
+23
 normal! zo
 49
 normal! zo
-let s:l = 1 - ((0 * winheight(0) + 23) / 46)
+51
+normal! zo
+69
+normal! zo
+69
+normal! zo
+69
+normal! zo
+69
+normal! zo
+69
+normal! zo
+let s:l = 42 - ((15 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 023|
+keepjumps 42
+normal! 037|
 tabnext
-edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/ichingshifa.py
+edit ~/quotes_user.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+66
+normal! zo
+let s:l = 145 - ((11 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 145
+normal! 055|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
+argglobal
+setlocal fdm=indent
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+31
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+34
+normal! zo
+46
+normal! zo
+58
+normal! zo
+58
+normal! zo
+58
+normal! zo
+58
+normal! zo
+58
+normal! zo
+100
+normal! zo
+105
+normal! zo
+120
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+137
+normal! zo
+159
+normal! zo
+163
+normal! zo
+169
+normal! zo
+190
+normal! zo
+197
+normal! zo
+198
+normal! zo
+200
+normal! zo
+204
+normal! zo
+205
+normal! zo
+205
+normal! zo
+205
+normal! zo
+228
+normal! zo
+233
+normal! zo
+236
+normal! zo
+236
+normal! zo
+236
+normal! zo
+236
+normal! zo
+236
+normal! zo
+278
+normal! zo
+283
+normal! zo
+304
+normal! zo
+309
+normal! zo
+let s:l = 42 - ((16 * winheight(0) + 24) / 49)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 42
+normal! 013|
+tabnext
+edit ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/pyLunarCalendar/lunarApi.py
 argglobal
 balt ~/Google\ 云端硬盘/tornadoProject/ichingshifa/utils/uimethods.py
 setlocal fdm=indent
@@ -243,19 +444,22 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 217 - ((20 * winheight(0) + 23) / 46)
+9
+normal! zo
+12
+normal! zo
+let s:l = 53 - ((32 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 217
-normal! 013|
-tabnext 3
-set stal=1
+keepjumps 53
+normal! 019|
+tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=aoO
+set winheight=1 winwidth=20 shortmess=aoOc
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
