@@ -70,6 +70,7 @@ vim.cmd [[packadd packer.nvim]]
 require('packer').startup({function()
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
+    use {'dstein64/vim-startuptime'} -- 启动插件时间：StartupTime
     use {'lifepillar/vim-cheat40'} -- vim 备忘录 ;h
     -- using packer.nvim
     -- 模糊查找
@@ -109,7 +110,6 @@ require('packer').startup({function()
     use {'ms-jpq/coq_nvim', branch='coq'} -- COQdeps COQnow COQhelp
     use {'ms-jpq/coq.artifacts', branch='artifacts'}
     use {'ms-jpq/coq.thirdparty', branch='3p'}
-    use 'glepnir/lspsaga.nvim' -- light-weight with highly a performant UI
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
     use 'romgrk/nvim-treesitter-context' --  类和函数超屏显示
@@ -136,43 +136,6 @@ require'colorizer'.setup{
         html = {
             mode = 'foreground';
         }
-}
--- lspsaga config
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
-    use_saga_diagnostic_sign = true,
-    -- error_sign = '',
-    -- warn_sign = '',
-    -- hint_sign = '',
-    -- infor_sign = '',
-    -- dianostic_header_icon = '   ',
-    -- code_action_icon = ' ',
-    code_action_prompt = {
-      enable = true,
-      sign = true,
-      sign_priority = 20,
-      virtual_text = true,
-    },
-    -- finder_definition_icon = '  ',
-    -- finder_reference_icon = '  ',
-    max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-    finder_action_keys = {
-      open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
-    },
-    code_action_keys = {
-      quit = 'q',exec = '<CR>'
-    },
-    rename_action_keys = {
-      quit = '<C-c>',exec = '<CR>'  -- quit can be a table
-    },
-    definition_preview_icon = '  ',
-    -- "single" "double" "round" "plus"
-    border_style = "single",
-    rename_prompt_prefix = '➤',
-    -- if you don't use nvim-lspconfig you must pass your server name and
-    -- the related filetypes into this table
-    -- like server_filetype_map = {metals = {'sbt', 'scala'}}
-    -- server_filetype_map = {}
 }
 -- jedi_language_server 速度好像更快：cmd只支持绝对路径
 require'lspconfig'.jedi_language_server.setup{
@@ -336,10 +299,10 @@ let g:neoformat_enabled_python = ['yapf',]
 " let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
 autocmd FileType python noremap <buffer> <F8> :Neoformat! python yapf<CR>
 " save files with auto format
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 " ******************neomake 设置***************
 let g:neomake_python_enabled_makers = ['flake8'] "['pylint']
 " neomake启动自动检查 normal mode (after 500ms; no delay when writing)
@@ -528,20 +491,8 @@ nnoremap <silent> <Localleader>ge <cmd>lua vim.lsp.buf.references()<CR>
 " " 查看后一处语法错误
 " nnoremap <silent> <Localleader>gk <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " " go to definition lsp_finder/ preview_definition
-" nnoremap <silent> <Localleader>gd :Lspsaga preview_definition<CR>
-" preview definition
-nnoremap <silent> <Localleader>gp :Lspsaga preview_definition<CR>
-" show documents
-nnoremap <silent> <Localleader>gh :Lspsaga hover_doc<CR>
-" signature help
-nnoremap <silent> <Localleader>gs :Lspsaga signature_help<CR>
-" fix
-nnoremap <silent> <Localleader>ga :Lspsaga code_action<CR>
-" rename
-nnoremap <silent> <Localleader>gr :Lspsaga rename<CR>
-" jump diagnostic
-nnoremap <silent> <Localleader>gj :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> <Localleader>gk :Lspsaga diagnostic_jump_prev<CR>
+" " formatting coding 
+" nnoremap <silent> <Localleader>gf <cmd>lua vim.lsp.buf.formatting()<CR>
 " ******************Leader***************
 let g:which_key_map_localleader =  {
             \'b' : 'LeaderF 缓冲区文件',
@@ -619,18 +570,18 @@ nnoremap <silent> f :<c-u>WhichKey 'f'<CR>
 " * autoindent, ai: 自动缩进
 " * smartindent, si: 智能缩进 
 " * textwidth: 自动格式化时假设的文本最大宽度（列数）
-autocmd BufEnter *.inc,*.php set filetype=php expandtab tabstop=4 shiftwidth=4 autoindent smartindent softtabstop=4
-autocmd BufEnter *.java,*.jsp set shiftwidth=4 expandtab tabstop=4 softtabstop=4 autoindent smartindent
-autocmd FileType c,cpp  set noexpandtab shiftwidth=4 softtabstop=4
-autocmd FileType dot  set shiftwidth=4 expandtab softtabstop=4
-autocmd FileType sh set expandtab tabstop=4 shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType java,jsp set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd BufEnter *.html,*.xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType html,xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType javascript,css set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-autocmd FileType python set shiftwidth=4 expandtab softtabstop=4
-autocmd FileType *.conf set shiftwidth=4 expandtab softtabstop=4
-autocmd FileType yaml set shiftwidth=4 expandtab softtabstop=4
+" autocmd BufEnter *.inc,*.php set filetype=php expandtab tabstop=4 shiftwidth=4 autoindent smartindent softtabstop=4
+" autocmd BufEnter *.java,*.jsp set shiftwidth=4 expandtab tabstop=4 softtabstop=4 autoindent smartindent
+" autocmd FileType c,cpp  set noexpandtab shiftwidth=4 softtabstop=4
+" autocmd FileType dot  set shiftwidth=4 expandtab softtabstop=4
+" autocmd FileType sh set expandtab tabstop=4 shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
+" autocmd FileType java,jsp set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
+" autocmd BufEnter *.html,*.xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
+" autocmd FileType html,xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
+" autocmd FileType javascript,css set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
+" autocmd FileType python set shiftwidth=4 expandtab softtabstop=4
+" autocmd FileType *.conf set shiftwidth=4 expandtab softtabstop=4
+" autocmd FileType yaml set shiftwidth=4 expandtab softtabstop=4
 " 所有buffer关闭时打开首页,使用命令:bd (buffer-delete) 
 " autocmd BufEnter * if len(tabpagebuflist()) == 1 | Startify | endif
 " 打开文件时，自动跳到上次打开时的位置。如果该位置有错，则不做跳转

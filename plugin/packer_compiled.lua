@@ -71,132 +71,154 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   LeaderF = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/LeaderF"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/LeaderF",
+    url = "https://github.com/Yggdroot/LeaderF"
   },
   ["accelerated-jk"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/accelerated-jk"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/accelerated-jk",
+    url = "https://github.com/rhysd/accelerated-jk"
   },
   ["auto-pairs"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/auto-pairs"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/auto-pairs",
+    url = "https://github.com/jiangmiao/auto-pairs"
   },
   ["beacon.nvim"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/beacon.nvim"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/beacon.nvim",
+    url = "https://github.com/danilamihailov/beacon.nvim"
   },
-  ["completion-buffers"] = {
+  ["coq.artifacts"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/completion-buffers"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/coq.artifacts",
+    url = "https://github.com/ms-jpq/coq.artifacts"
   },
-  ["completion-nvim"] = {
+  ["coq.thirdparty"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/completion-nvim"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/coq.thirdparty",
+    url = "https://github.com/ms-jpq/coq.thirdparty"
+  },
+  coq_nvim = {
+    loaded = true,
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/coq_nvim",
+    url = "https://github.com/ms-jpq/coq_nvim"
   },
   hop = {
     config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0" },
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/hop"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/hop",
+    url = "https://github.com/phaazon/hop.nvim"
   },
   indentLine = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/indentLine"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/indentLine",
+    url = "https://github.com/Yggdroot/indentLine"
   },
   ["lightline.vim"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lightline.vim"
-  },
-  ["lspsaga.nvim"] = {
-    loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/lightline.vim",
+    url = "https://github.com/itchyny/lightline.vim"
   },
   neoformat = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/neoformat"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/neoformat",
+    url = "https://github.com/sbdchd/neoformat"
   },
   neomake = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/neomake"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/neomake",
+    url = "https://github.com/neomake/neomake"
   },
   nerdcommenter = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nerdcommenter"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nerdcommenter",
+    url = "https://github.com/scrooloose/nerdcommenter"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-treesitter"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-treesitter-context"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/romgrk/nvim-treesitter-context"
   },
   ["nvim-treesitter-refactor"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-refactor"
   },
   onehalf = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/onehalf/vim/"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/onehalf/vim/",
+    url = "https://github.com/sonph/onehalf"
   },
   ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   tabular = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/tabular"
-  },
-  ultisnips = {
-    loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/ultisnips"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/tabular",
+    url = "https://github.com/godlygeek/tabular"
   },
   undotree = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/undotree"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-cheat40"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-cheat40"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-cheat40",
+    url = "https://github.com/lifepillar/vim-cheat40"
   },
   ["vim-closetag"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-closetag"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-closetag",
+    url = "https://github.com/alvan/vim-closetag"
   },
   ["vim-cursorword"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-cursorword"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-cursorword",
+    url = "https://github.com/itchyny/vim-cursorword"
   },
   ["vim-doge"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-doge"
-  },
-  ["vim-snippets"] = {
-    loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-snippets"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-doge",
+    url = "https://github.com/kkoomen/vim-doge"
   },
   ["vim-startify"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-startify"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-startify",
+    url = "https://github.com/mhinz/vim-startify"
   },
   ["vim-surround"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-surround"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   },
   ["vim-which-key"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-which-key"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-which-key",
+    url = "https://github.com/liuchengxu/vim-which-key"
   },
   ["vim-xkbswitch"] = {
     loaded = true,
-    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-xkbswitch"
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-xkbswitch",
+    url = "https://github.com/lyokha/vim-xkbswitch"
   }
 }
 
