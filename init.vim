@@ -295,9 +295,9 @@ let g:lightline = {'colorscheme': 'one',}
 set showtabline=2
 " autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 " ******************neoformat 设置***************
-let g:neoformat_enabled_python = ['yapf',]
-" let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
-autocmd FileType python noremap <buffer> <F8> :Neoformat! python yapf<CR>
+let g:neoformat_enabled_python = ['black', 'yapf',]
+" let g:neoformat_enabled_python = ['black', 'autopep8', 'yapf', 'docformatter']
+autocmd FileType python noremap <buffer> <F8> :Neoformat! python black --fast<CR>
 " save files with auto format
 " augroup fmt
 "   autocmd!

@@ -205,6 +205,11 @@ _G.packer_plugins = {
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-startify",
     url = "https://github.com/mhinz/vim-startify"
   },
+  ["vim-startuptime"] = {
+    loaded = true,
+    path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-startuptime",
+    url = "https://github.com/dstein64/vim-startuptime"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/Users/xuanxuan/.local/share/nvim/site/pack/packer/start/vim-surround",
