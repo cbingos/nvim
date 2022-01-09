@@ -485,7 +485,8 @@ set lazyredraw
 " 设置历史操作记录为1000条
 set history=1000
 " 共享系统剪切板, m1 架构下好像存在问题
-set clipboard=unnamed
+" set clipboard=unnamed
+set clipboard^=unnamed,unnamedplus
 " 命令模式下，在底部显示，当前键入的指令。键入指令是2y3d，底部显示2y3，键入d的时候，显示消失
 set showcmd
 " 保留撤销历史
