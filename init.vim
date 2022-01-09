@@ -1,4 +1,4 @@
-" PackerSync + treesitter + nvim-lspconfig + completion-nvim
+" PackerSync + treesitter + nvim-lspconfig + nvim-cmp completion
 " ******************vim基础***************
 " 快速移动行:6m0 第6行移至第1行[range]m[range] -->move
 " 快速复制行:6c0 复制6行至第1行[range]c[range] -->copy
@@ -44,20 +44,16 @@
 " > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
 " > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 " > conda config --set show_channel_urls yes
-" > pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改境设置***************
-" let g:coq_settings = { 'auto_start': v:true } " coq 自动启动 
+" https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+" pip install python-lsp-server python-lsp-black neovim flake8
 " ******************nvim treesitter语法高亮设置***************
 " 真彩色,修复终端和gui显示不同配色问题
 if has("termguicolors")
-    " fix bug for vim
-    " set t_8f=^[[38;2;%lu;%lu;%lum
-    " set t_8b=^[[48;2;%lu;%lu;%lum
     " enable true color
     set termguicolors
     set guioptions-=e
 endif
 lua <<EOF
--- automatically ensure that packer.nvim is installed on any machine
 local execute = vim.api.nvim_command
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -72,14 +68,9 @@ require('packer').startup({function()
     use {'wbthomason/packer.nvim'}
     use 'neovim/nvim-lspconfig' -- lsp config
     use {'dstein64/vim-startuptime'} -- 启动插件时间：StartupTime
-    -- use {'lifepillar/vim-cheat40'} -- vim 备忘录 ;h
-    -- using packer.nvim
-    -- 模糊查找
-    use {'Yggdroot/LeaderF', run=':LeaderfInstallCExtension' }
+    use {'Yggdroot/LeaderF', run=':LeaderfInstallCExtension' } -- 模糊查找
     -- 删除the delimiters entirely, press ds"
     use 'tpope/vim-surround' -- 修改包裹符号 'string' 按下: cs'": string" 
-    -- https://github.com/terryma/vim-multiple-cursors/wiki/Keystrokes-for-example-gifs
-    -- use 'terryma/vim-multiple-cursors' -- 快速编辑c+v c+n,c,c+return回车 
     use 'danilamihailov/beacon.nvim' --大跳转时分屏切换高亮显示
     use 'rhysd/accelerated-jk' -- 加快j、k 速度
     use 'mbbill/undotree' -- 显示撤消历史 ;u
@@ -95,10 +86,11 @@ require('packer').startup({function()
     use 'mhinz/vim-startify' -- 在启动窗口显示最近打开的文件 :Startify
     use 'jiangmiao/auto-pairs' -- 括号自动补全
     use 'godlygeek/tabular' -- Text 对齐符号、对齐方式 :Tabularized /,
-    use 'itchyny/lightline.vim' -- 状态栏美化
-    use 'Yggdroot/indentLine' -- 缩进线
+    use 'plasticboy/vim-markdown' -- markdown
+    use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
+    use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
+    use "lukas-reineke/indent-blankline.nvim" -- 缩进线
     use 'itchyny/vim-cursorword' -- 光标下划线和高亮
-    -- neovim theme onehalf theme install after execute cmd
     -- cp -r ~/.local/share/nvim/site/pack/packer/start/onehalf/vim/* \
     -- ~/.local/share/nvim/site/pack/packer/start/onehalf/
     use {'sonph/onehalf',rtp='vim/'} -- theme onehalf
@@ -113,18 +105,13 @@ require('packer').startup({function()
     use {'hrsh7th/vim-vsnip',} 
     use {'kkoomen/vim-doge', run=':call doge#install()' } -- 自动生成文档noral模式下 <Leader>d
     use 'sbdchd/neoformat'  -- 代码格式化 call:F8 call :Neoformat /:Neoformat! python black 
-    -- use 'neomake/neomake' -- python 代码检查
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
-    use 'romgrk/nvim-treesitter-context' --  类和函数超屏显示
+    -- use 'romgrk/nvim-treesitter-context' --  类和函数超屏显示
     use 'nvim-treesitter/nvim-treesitter-refactor' -- 变量与函数跳转 
     use 'liuchengxu/vim-which-key' -- 快捷键提示
     use 'alvan/vim-closetag'
-    -- ******************vim输入法自动切换***************
-    -- https://github.com/myshov/xkbswitch-macosx
-    -- sudo curl -o /usr/local/bin/xkbswitch https://raw.githubusercontent.com/myshov/xkbswitch-macosx/master/bin/xkbswitch
-    -- sudo chmod 777 /usr/local/bin/xkbswitch
-    use 'rlue/vim-barbaric'
+    use 'lyokha/vim-xkbswitch' -- 输入法自动切换
 end,
     config = {
         display = {open_fn = require('packer.util').float,}
@@ -133,7 +120,6 @@ end,
 local cmp = require'cmp'
 cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -169,8 +155,8 @@ cmp.setup({
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      { name = 'path' }, -- For luasnip users.
+      { name = 'vsnip' }, 
+      { name = 'path' },
       { name = 'buffer' },
     }),
     completion = {
@@ -182,7 +168,6 @@ cmp.setup({
     },
   })
 
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
     sources = {
       { name = 'buffer' }
@@ -230,11 +215,6 @@ lspconfig.pylsp.setup({
   },
   capabilities = capabilities,
 })
--- jedi_language_server 速度好像更快：cmd只支持绝对路径
--- require'lspconfig'.jedi_language_server.setup{
--- cmd = {'/Users/abc/miniforge3/bin/jedi-language-server'},
---   capabilities  = capabilities,
--- }
 -- dart flutter
 require'nvim-treesitter.configs'.setup {
     -- run :TSInstall python html css dart javascript lua typescript
@@ -283,29 +263,133 @@ require'nvim-treesitter.configs'.setup {
         },
     },
 }
-require'treesitter-context.config'.setup{
-    enable = true, -- 函数或类太长时，上方显示该前所属
+-- require'treesitter-context.config'.setup{
+--    enable = true, -- 函数或类太长时，上方显示该前所属
+-- }
+-- 缩进线显示
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+    show_current_context_start = true,
 }
+require("lualine").setup({
+  options = {
+    icons_enabled = true,
+    theme = "auto",
+    -- component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = { "mode" },
+    lualine_b = { "branch", "diff" },
+    lualine_c = {
+      "filename",
+      {
+        ime_state,
+        color = {fg = 'black', bg = '#e4736b'}
+      },
+      {
+        spell,
+        color = {fg = 'black', bg = '#5999da'}
+      },
+    },
+    lualine_x = {
+      "encoding",
+      {
+        "fileformat",
+        symbols = {
+          unix = "unix",
+          dos = "win",
+          mac = "mac",
+        },
+      },
+      "filetype",
+    },
+    lualine_y = { "progress" },
+    lualine_z = {
+      "location",
+      {
+        "diagnostics",
+        sources = { "nvim_diagnostic" }
+      },
+      {
+        trailing_space,
+        color = "WarningMsg"
+      },
+      {
+        mixed_indent,
+        color = "WarningMsg"
+      },
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  extensions = {'quickfix', 'fugitive'},
+})
+require("bufferline").setup({
+  options = {
+    numbers = "buffer_id",
+    close_command = "bdelete! %d",
+    right_mouse_command = nil,
+    left_mouse_command = "buffer %d",
+    middle_mouse_command = nil,
+    indicator_icon = "▎",
+    buffer_close_icon = "x",
+    modified_icon = "●",
+    close_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
+    max_name_length = 18,
+    max_prefix_length = 15,
+    tab_size = 10,
+    diagnostics = false,
+    custom_filter = function(bufnr)
+      local exclude_ft = { "qf", "fugitive", "git" }
+      local cur_ft = vim.bo[bufnr].filetype
+      local should_filter = vim.tbl_contains(exclude_ft, cur_ft)
+
+      if should_filter then
+        return false
+      end
+
+      return true
+    end,
+    show_buffer_icons = false,
+    show_buffer_close_icons = true,
+    show_close_icon = true,
+    show_tab_indicators = true,
+    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+    separator_style = "bar",
+    enforce_regular_tabs = false,
+    always_show_bufferline = true,
+    sort_by = "id",
+  },
+})
 EOF
 " ******************python path设置***************
 let g:python3_host_prog = "/Users/abc/miniforge3/bin/python"
 " ******************accelerated_jk 加快j、k速度设置***************
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-" ******************coq-nvim lsp异步补全设置***************
-" Use completion-nvim in every buffer
-" " Use <Tab> and <S-Tab> to navigate through popup menu
-" set nobomb
-" let g:coq_settings = { 'display.icons.mode': 'none' }
-" let g:coq_settings = { 'keymap.pre_select': v:true }
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Set completeopt to have a better completion experience
-" set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion
 set shortmess+=c
 " ******************leader键设置***************
-" 定义本地leader 键;
 let g:mapleader = ";"
 let g:maplocalleader=';'
 " ******************文件树Netrw 设置***************
@@ -364,26 +448,16 @@ let g:startify_lists = [
         \ ]
 let g:startify_bookmarks = ['~/Documents/Google 云端硬盘/tornadoProject/ichingshifa','~/Public/']
 " ******************theme 设置***************
-" let g:gruvbox_italic=1
-" theme gui&command模式配置
-" " use a slightly darker background, like GitHub inline code blocks
 if has("gui_running")
     set background=light
-    " set background=dark
     colorscheme onehalflight
 else
     set background=light
     colorscheme onehalflight
-    " colorscheme everforest 
-    " set background=dark
 endif
-" ******************lightline状态栏设置***************
-let g:lightline = {'colorscheme': 'one',}
-set showtabline=2
-" autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 " ******************neoformat 设置***************
-let g:neoformat_enabled_python = ['black', 'yapf',]
-" let g:neoformat_enabled_python = ['black', 'autopep8', 'yapf', 'docformatter']
+let g:neoformat_enabled_python = ['black']
+" ['black', 'autopep8', 'yapf', 'docformatter']
 autocmd FileType python noremap <buffer> <F8> :Neoformat! python black --fast<CR>
 " save files with auto format
 " augroup fmt
@@ -393,9 +467,6 @@ autocmd FileType python noremap <buffer> <F8> :Neoformat! python black --fast<CR
 " ****************** 代码注释插件 nerdcomment设置***************
 let g:NERDSpaceDelims=1
 " ******************vim基本设置***************
-" 设置分割线 ┊,│,
-set fillchars=vert:┊,stl:\ ,stlnc:\ 
-set list lcs=tab:\ \ ,conceal:\|
 " 保持缩进
 augroup remember_folds
   autocmd!
@@ -470,7 +541,6 @@ set tabstop=4
 set shiftwidth=4
 " 由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。
 set expandtab
-set backspace=indent,eol,start
 " set smarttab
 set nocompatible
 " 命令模式下，底部操作指令按下 Tab 键自动补全。
@@ -506,7 +576,9 @@ set fileencoding=utf-8
 set foldmethod=indent
 set foldlevel=99
 " ******************vim输入法自动切换***************
-" let g:XkbSwitchEnabled = 1
+" https://github.com/vovkasm/input-source-switcher git clone and make install
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
 " ******************neovim自带高亮复制显示设置***************
 augroup highlight_yank
     autocmd!
@@ -536,8 +608,6 @@ autocmd BufNewFile *py exec ":call SetPythonTitle()"
 func SetPythonTitle()
   call setline(1,"# -*- coding: utf-8 -*-")
   call append(line("."), "\# File Name: ".("%"))
-  call append(line(".")+1, "\# Author: ")
-  call append(line(".")+2, "\# mail: ")
   call append(line(".")+5, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))
 endfunc
 " 新建文件后，自动定位到文件末尾
@@ -556,8 +626,6 @@ nnoremap <silent> <leader>wh :wincmd h<CR>
 nnoremap <silent> <leader>wj :wincmd j<CR>
 nnoremap <silent> <leader>wk :wincmd k<CR>
 nnoremap <silent> <leader>wl :wincmd l<CR>
-" ******************vim 显示快捷键帮助文档***************
-" nnoremap <silent> <leader>h :Cheat40<CR>
 " ******************lsp-key设置***************
 " 查看函数声明
 " nnoremap <silent> <Localleader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -625,13 +693,6 @@ let g:which_key_map_treesitter_refactor =  {
             \}
 call which_key#register('f', "g:which_key_map_treesitter_refactor")
 " ******************tab切换***************
-" 切换tab：gt gT
-" 新建tab：:tabnew
-" 关闭当前tab：:tabc
-" 关闭所有其他的tab：:tabo
-" 查看所有打开的tab：:tabs
-" 前一个tab：:tabp      
-" 后一个tab：:tabn      
 let g:which_key_map_tab = {
             \'j' : ['tabn','tab下一个'],
             \'k' : ['tabp','tab前一个'],
@@ -646,26 +707,6 @@ nnoremap <silent> <localleader> :WhichKey ';'<CR>
 nnoremap <silent> t :<c-u>WhichKey 't'<CR>
 nnoremap <silent> f :<c-u>WhichKey 'f'<CR>
 " ******************startify hide status***************
-" 根据不同文件设定编辑参数
-" * shiftwidth,sw: 缩进宽度
-" * softtabstop, sts: Tab 的宽度，软设置，并不改变 tabstop 的设定
-" * expandtab, et: 把 tab 键展开成空格
-" * autoindent, ai: 自动缩进
-" * smartindent, si: 智能缩进 
-" * textwidth: 自动格式化时假设的文本最大宽度（列数）
-" autocmd BufEnter *.inc,*.php set filetype=php expandtab tabstop=4 shiftwidth=4 autoindent smartindent softtabstop=4
-" autocmd BufEnter *.java,*.jsp set shiftwidth=4 expandtab tabstop=4 softtabstop=4 autoindent smartindent
-" autocmd FileType c,cpp  set noexpandtab shiftwidth=4 softtabstop=4
-" autocmd FileType dot  set shiftwidth=4 expandtab softtabstop=4
-" autocmd FileType sh set expandtab tabstop=4 shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-" autocmd FileType java,jsp set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-" autocmd BufEnter *.html,*.xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-" autocmd FileType html,xml set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-" autocmd FileType javascript,css set shiftwidth=4 expandtab softtabstop=4 autoindent smartindent
-" autocmd FileType python set shiftwidth=4 expandtab softtabstop=4
-" autocmd FileType *.conf set shiftwidth=4 expandtab softtabstop=4
-" autocmd FileType yaml set shiftwidth=4 expandtab softtabstop=4
-" 所有buffer关闭时打开首页,使用命令:bd (buffer-delete) 
 " autocmd BufEnter * if len(tabpagebuflist()) == 1 | Startify | endif
 " 打开文件时，自动跳到上次打开时的位置。如果该位置有错，则不做跳转
 autocmd BufReadPost *
