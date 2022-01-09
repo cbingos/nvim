@@ -45,7 +45,7 @@
 " > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
 " > conda config --set show_channel_urls yes
 " > pip install neovim flake8 jedi-language-server # lspconfig配置需要绝对路径，记得修改境设置***************
-" let g:coq_settings = { 'auto_start': v:true } " coq 自动启动 
+let g:coq_settings = { 'auto_start': v:true } " coq 自动启动 
 " ******************nvim treesitter语法高亮设置***************
 " 真彩色,修复终端和gui显示不同配色问题
 if has("termguicolors")
@@ -70,9 +70,8 @@ vim.cmd [[packadd packer.nvim]]
 require('packer').startup({function()
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
-    use 'neovim/nvim-lspconfig' -- lsp config
     use {'dstein64/vim-startuptime'} -- 启动插件时间：StartupTime
-    -- use {'lifepillar/vim-cheat40'} -- vim 备忘录 ;h
+    use {'lifepillar/vim-cheat40'} -- vim 备忘录 ;h
     -- using packer.nvim
     -- 模糊查找
     use {'Yggdroot/LeaderF', run=':LeaderfInstallCExtension' }
@@ -102,18 +101,14 @@ require('packer').startup({function()
     -- cp -r ~/.local/share/nvim/site/pack/packer/start/onehalf/vim/* \
     -- ~/.local/share/nvim/site/pack/packer/start/onehalf/
     use {'sonph/onehalf',rtp='vim/'} -- theme onehalf
-    -- python auto-completion engine
-    use {"hrsh7th/nvim-cmp",} 
-    -- nvim-cmp completion sources
-    use {"hrsh7th/cmp-nvim-lsp",}
-    use {'hrsh7th/cmp-cmdline',}
-    use {"hrsh7th/cmp-path",}
-    use {"hrsh7th/cmp-buffer",}
-    use {'hrsh7th/cmp-vsnip',} 
-    use {'hrsh7th/vim-vsnip',} 
+    -- python 相关
     use {'kkoomen/vim-doge', run=':call doge#install()' } -- 自动生成文档noral模式下 <Leader>d
     use 'sbdchd/neoformat'  -- 代码格式化 call:F8 call :Neoformat /:Neoformat! python black 
-    -- use 'neomake/neomake' -- python 代码检查
+    use 'neomake/neomake' -- python 代码检查
+    use 'neovim/nvim-lspconfig' -- lsp config
+    use {'ms-jpq/coq_nvim', branch='coq'} -- COQdeps COQnow COQhelp
+    use {'ms-jpq/coq.artifacts', branch='artifacts'}
+    use {'ms-jpq/coq.thirdparty', branch='3p'}
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
     use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
     use 'romgrk/nvim-treesitter-context' --  类和函数超屏显示
@@ -130,77 +125,7 @@ end,
         display = {open_fn = require('packer.util').float,}
     }
 })
-local cmp = require'cmp'
-cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    mapping = {
-      ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-      end,
-      ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-      end,
-      ['<Esc>'] = cmp.mapping.close(),
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
-      { name = 'path' }, -- For luasnip users.
-      { name = 'buffer' },
-    }),
-    completion = {
-        keyword_length = 1,
-        completeopt = "menu,noselect"
-    },
-    experimental = {
-        ghost_text = false
-    },
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-})
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-local lspconfig = require("lspconfig")
+local coq = require "coq"
 -- nvim-colorizer.lua: #8080ff; 十六进制颜色实时显示
 require'colorizer'.setup{
         'css';
@@ -210,32 +135,20 @@ require'colorizer'.setup{
             mode = 'foreground';
         }
 }
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
--- pip install python-lsp-server python-lsp-black
-lspconfig.pylsp.setup({
-  on_attach = custom_attach,
-  settings = {
-    pylsp = {
-      plugins = {
-        -- pylint = { enabled = true, executable = "pylint" },
-        pyflakes = { enabled = true, executable = "flake8"},
-        -- pycodestyle = { enabled = true},
-        jedi_completion = { fuzzy = true },
-        python_lsp_black = { enabled = true },
-      },
-    },
-  },
-  flags = {
-    debounce_text_changes = 200,
-  },
-  capabilities = capabilities,
-})
 -- jedi_language_server 速度好像更快：cmd只支持绝对路径
--- require'lspconfig'.jedi_language_server.setup{
--- cmd = {'/Users/abc/miniforge3/bin/jedi-language-server'},
---   capabilities  = capabilities,
--- }
+require'lspconfig'.jedi_language_server.setup{
+cmd = {'/Users/abc/miniforge3/bin/jedi-language-server'},
+    coq.lsp_ensure_capabilities()
+}
 -- dart flutter
+-- require'lspconfig'.dartls.setup{coq.lsp_ensure_capabilities()}
+-- coq_3p
+require("coq_3p") {
+  { src = "nvimlua", short_name = "nLUA" },
+  { src = "vimtex", short_name = "vTEX" },
+  -- { src = "copilot", short_name = "COP", tmp_accept_key = "<c-r>" },
+  { src = "bc", short_name = "MATH", precision = 6 },
+}
 require'nvim-treesitter.configs'.setup {
     -- run :TSInstall python html css dart javascript lua typescript
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -296,8 +209,8 @@ nmap k <Plug>(accelerated_jk_gk)
 " Use completion-nvim in every buffer
 " " Use <Tab> and <S-Tab> to navigate through popup menu
 " set nobomb
-" let g:coq_settings = { 'display.icons.mode': 'none' }
-" let g:coq_settings = { 'keymap.pre_select': v:true }
+let g:coq_settings = { 'display.icons.mode': 'none' }
+let g:coq_settings = { 'keymap.pre_select': v:true }
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set completeopt to have a better completion experience
@@ -390,6 +303,10 @@ autocmd FileType python noremap <buffer> <F8> :Neoformat! python black --fast<CR
 "   autocmd!
 "   autocmd BufWritePre * undojoin | Neoformat
 " augroup END
+" ******************neomake 设置***************
+let g:neomake_python_enabled_makers = ['flake8'] "['pylint']
+" neomake启动自动检查 normal mode (after 500ms; no delay when writing)
+call neomake#configure#automake('nrwi', 500)
 " ****************** 代码注释插件 nerdcomment设置***************
 let g:NERDSpaceDelims=1
 " ******************vim基本设置***************
@@ -414,7 +331,7 @@ set lazyredraw
 " 设置历史操作记录为1000条
 set history=1000
 " 共享系统剪切板, m1 架构下好像存在问题
-set clipboard=unnamed
+" set clipboard=unnamed
 " 命令模式下，在底部显示，当前键入的指令。键入指令是2y3d，底部显示2y3，键入d的时候，显示消失
 set showcmd
 " 保留撤销历史
@@ -557,7 +474,7 @@ nnoremap <silent> <leader>wj :wincmd j<CR>
 nnoremap <silent> <leader>wk :wincmd k<CR>
 nnoremap <silent> <leader>wl :wincmd l<CR>
 " ******************vim 显示快捷键帮助文档***************
-" nnoremap <silent> <leader>h :Cheat40<CR>
+nnoremap <silent> <leader>h :Cheat40<CR>
 " ******************lsp-key设置***************
 " 查看函数声明
 " nnoremap <silent> <Localleader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
