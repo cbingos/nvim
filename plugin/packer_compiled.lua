@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/beacon.nvim",
     url = "https://github.com/danilamihailov/beacon.nvim"
   },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -125,10 +130,10 @@ _G.packer_plugins = {
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
-  ["lightline.vim"] = {
+  ["lualine.nvim"] = {
     loaded = true,
-    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/lightline.vim",
-    url = "https://github.com/itchyny/lightline.vim"
+    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   neoformat = {
     loaded = true,
@@ -160,15 +165,15 @@ _G.packer_plugins = {
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-treesitter-context"] = {
-    loaded = true,
-    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
-    url = "https://github.com/romgrk/nvim-treesitter-context"
-  },
   ["nvim-treesitter-refactor"] = {
     loaded = true,
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/nvim-treesitter-refactor",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-refactor"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   onehalf = {
     loaded = true,
@@ -204,6 +209,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/vim-doge",
     url = "https://github.com/kkoomen/vim-doge"
+  },
+  ["vim-markdown"] = {
+    loaded = true,
+    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/vim-markdown",
+    url = "https://github.com/plasticboy/vim-markdown"
   },
   ["vim-startify"] = {
     loaded = true,

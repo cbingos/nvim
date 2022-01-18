@@ -386,7 +386,11 @@ let g:python3_host_prog = "/Users/abc/miniforge3/bin/python"
 " ******************accelerated_jk 加快j、k速度设置***************
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-" set shortmess+=c
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set completeopt=menuone,noinsert,noselect
+" Avoid showing message extra message when using completion
+set shortmess+=c
 " ******************leader键设置***************
 let g:mapleader = ";"
 let g:maplocalleader=';'
@@ -422,6 +426,7 @@ noremap <silent> <Localleader>fw :LeaderfWindow<cr>
 " Hop 快捷单词跳转 ;j 行跳转;l 
 noremap <silent> <Localleader>j <cmd>lua require'hop'.hint_words()<cr>
 noremap <silent> <Localleader>l :HopLine<cr>
+
 " ******************vim-startify启动页***************
 let g:startify_session_dir = '~/.config/nvim/session'
 let g:startify_session_autoload = 1
@@ -454,6 +459,7 @@ else
 endif
 " ******************neoformat 设置***************
 let g:neoformat_enabled_python = ['black']
+" ['black', 'autopep8', 'yapf', 'docformatter']
 autocmd FileType python noremap <buffer> <F8> :Neoformat! python black --fast<CR>
 autocmd FileType js noremap <buffer> <F9> :Neoformat! js-beautify<CR>
 " save files with auto format
@@ -481,9 +487,9 @@ augroup END
 set lazyredraw
 " 设置历史操作记录为1000条
 set history=1000
-" 共享系统剪切板, m1 架构下好像存在问题, mac下直接注释掉就可以复制中文！！！
+" 共享系统剪切板, m1 架构下好像存在问题
 " set clipboard=unnamed
-" set clipboard+=unnamed,unnamedplus
+set clipboard+=unnamed,unnamedplus
 " set clipboard=unnamedplus
 " 命令模式下，在底部显示，当前键入的指令。键入指令是2y3d，底部显示2y3，键入d的时候，显示消失
 set showcmd
@@ -498,6 +504,7 @@ set cursorline
 " 设置行宽，即一行显示多少个字符。
 set textwidth=108
 " 自动折行，即太长的行分成几行显示。
+" 关闭自动折行
 " set nowrap
 set wrap
 " 只有遇到指定的符号（比如空格、连词号和其他标点符号），才发生折行。
@@ -565,12 +572,12 @@ syntax enable
 " 自动切换工作目录，Vim会话之中打开多个文件情况
 set autochdir
 " encoding
-set fencs=utf-8,usc-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set termencoding=utf-8
+" set fencs=utf-8,usc-bom,shift-jis,gb18030,gbk,gb2312,cp936
+" set termencoding=utf-8
 " " 使用 utf-8 编码
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936
-set fileencoding=utf-8
+" set encoding=utf-8
+" set fileencodings=ucs-bom,utf-8,cp936
+" set fileencoding=utf-8
 set foldmethod=indent
 set foldlevel=99
 " ******************vim输入法自动切换***************
