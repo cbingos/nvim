@@ -95,14 +95,15 @@ require('packer').startup({function()
     -- ~/.local/share/nvim/site/pack/packer/start/onehalf/
     use {'sonph/onehalf',rtp='vim/'} -- theme onehalf
     -- python auto-completion engine
-    use {"hrsh7th/nvim-cmp",} 
+    use {"hrsh7th/nvim-cmp",}
     -- nvim-cmp completion sources
     use {"hrsh7th/cmp-nvim-lsp",}
     use {'hrsh7th/cmp-cmdline',}
     use {"hrsh7th/cmp-path",}
     use {"hrsh7th/cmp-buffer",}
-    use {'hrsh7th/cmp-vsnip',} 
-    use {'hrsh7th/vim-vsnip',} 
+    use {'SirVer/ultisnips',}
+    use {'honza/vim-snippets',}
+    use {'quangnguyen30192/cmp-nvim-ultisnips',}
     use {'kkoomen/vim-doge', run=':call doge#install()' } -- 自动生成文档noral模式下 <Leader>d
     use 'sbdchd/neoformat'  -- 代码格式化 call:F8 call :Neoformat /:Neoformat! python black 
     --" 代码高亮显示:TSInstall python css html javascript scss typescript
@@ -118,64 +119,68 @@ end,
     }
 })
 local cmp = require'cmp'
+local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 cmp.setup({
     snippet = {
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     mapping = {
+      ['<Esc>'] = cmp.mapping.close(),
+      -- ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      -- ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-e>"] = cmp.mapping.close(),
+      ["<CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace,select = true}),
       ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            -- fallback()
+            cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
+          end
       end,
       ['<S-Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            -- fallback()
+            cmp_ultisnips_mappings.jump_backwards(fallback)
+          end
       end,
-      ['<Esc>'] = cmp.mapping.close(),
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ["<cr>"] = cmp.mapping.confirm({select = true})
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, 
+      { name = 'ultisnips' }, 
       { name = 'path' },
       { name = 'buffer' },
     }),
     completion = {
         keyword_length = 1,
-        completeopt = "menu,noselect"
+        completeopt = "menu,menuone,noselect"
     },
     experimental = {
         ghost_text = false
     },
   })
 
-  cmp.setup.cmdline('/', {
+cmp.setup.cmdline('/', {
     sources = {
       { name = 'buffer' }
     }
-  })
+})
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
       { name = 'path' }
     }, {
@@ -383,6 +388,10 @@ require("bufferline").setup({
 EOF
 " ******************python path设置***************
 let g:python3_host_prog = "/Users/abc/miniforge3/bin/python"
+" ******************UltiSnips设置***************
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " ******************accelerated_jk 加快j、k速度设置***************
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)

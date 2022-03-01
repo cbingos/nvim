@@ -190,11 +190,6 @@ _G.packer_plugins = {
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/tabular",
     url = "https://github.com/godlygeek/tabular"
   },
-  undotree = {
-    loaded = true,
-    path = "/Users/abc/.local/share/nvim/site/pack/packer/start/undotree",
-    url = "https://github.com/mbbill/undotree"
-  },
   ["vim-closetag"] = {
     loaded = true,
     path = "/Users/abc/.local/share/nvim/site/pack/packer/start/vim-closetag",
@@ -261,5 +256,6 @@ if should_profile then save_profiles() end
 end)
 
 if not no_errors then
+  error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end
